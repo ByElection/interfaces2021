@@ -6,7 +6,7 @@ let imageScaledWidth;
 let imageScaledHeight;
 let clicked;
 
-function borrarTodo(){
+function borrarTodo(){ //borra el canvas y devuelve a sus dimensiones originales
   canvas.width = 800;
   canvas.height = 600;
   ctx.fillStyle = "#FFFFFF";
@@ -14,16 +14,16 @@ function borrarTodo(){
   conservarCambio();
 }
 
-function startPosition(){
+function startPosition(){ //indica si esta clickeado para la funcion draw
   clicked = true;
 }
 
-function finishPosition(){
+function finishPosition(){ //indica que se solto el click para que la funcion draw no dibuje
   clicked = false;
   ctx.beginPath();
 }
 
-function draw(e){
+function draw(e){ //dibuja en el cambas
   if (clicked) {
     ctx.lineWidth = 10;
     ctx.lineCap = "round";
@@ -34,27 +34,27 @@ function draw(e){
   }
 }
 
-function punteroNormal(){
+function punteroNormal(){ //cambia el puntero al puntero normal
   canvas.removeEventListener("mousedown",startPosition,false);
   canvas.removeEventListener("mouseup",finishPosition,false);
   canvas.removeEventListener("mousemove",draw,false);
 }
 
-function pincel(){
+function pincel(){ //cambia el puntero al pincel
   ctx.strokeStyle="#000000";
   canvas.addEventListener("mousedown",startPosition);
   canvas.addEventListener("mouseup",finishPosition);
   canvas.addEventListener("mousemove",draw);
 }
 
-function borrador(){
+function borrador(){ //cambia el puntero a borrador
   ctx.strokeStyle="#FFFFFF";
   canvas.addEventListener("mousedown",startPosition);
   canvas.addEventListener("mouseup",finishPosition);
   canvas.addEventListener("mousemove",draw);
 }
 
-function cargarImagen(){
+function cargarImagen(){ //carga una imagen al canvas
   let input = document.querySelector('#imagenacargar');
   input.click();
   input.onchange = imagenacargar => {
@@ -79,7 +79,7 @@ function cargarImagen(){
   }
 }
 
-function descargarImagen() {
+function descargarImagen() { // descarga la imagen actual
   let a = document.createElement('a');
   a.href = canvas.toDataURL();;
   a.download = 'untitled.jpeg';
@@ -87,11 +87,11 @@ function descargarImagen() {
   a.click();
 }
 
-function original(){
+function original(){ //vuelve a mostrar la ultima capa guardada
   ctx.drawImage(imagen, 0, 0, imageScaledWidth, imageScaledHeight);
 }
 
-function escalaGrises() {
+function escalaGrises() { //pasa la imagen a escala de grises sumando los valores rgb y dividiendolos por 3
   ctx.drawImage(imagen, 0, 0, imageScaledWidth, imageScaledHeight);
   let imageData = ctx.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
   for (var x = 0; x < imageData.width; x++) {
@@ -105,7 +105,7 @@ function escalaGrises() {
   ctx.putImageData(imageData, 0, 0);
 }
 
-function negativo() {
+function negativo() { //pasa la imagen a negativo restando el valor de cada pixel al valor 255
   ctx.drawImage(imagen, 0, 0, imageScaledWidth, imageScaledHeight);
   let imageData = ctx.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
   for (var x = 0; x < imageData.width; x++) {
@@ -118,7 +118,7 @@ function negativo() {
   ctx.putImageData(imageData, 0, 0);
 }
 
-function sepia() {
+function sepia() { //aplica filtro sepia multiplicando los pixeles por valores que transforman cada color
   ctx.drawImage(imagen, 0, 0, imageScaledWidth, imageScaledHeight);
   let imageData = ctx.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
   for (var x = 0; x < imageData.width; x++) {
@@ -131,7 +131,7 @@ function sepia() {
   ctx.putImageData(imageData, 0, 0);
 }
 
-function brillo() {
+function brillo() { //cambia el brillo de la imagen multiplicando cada pixel por el brillo
   let brillo = document.querySelector('#brillo').value;
   ctx.drawImage(imagen, 0, 0, imageScaledWidth, imageScaledHeight);
   let imageData = ctx.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
@@ -145,14 +145,14 @@ function brillo() {
   ctx.putImageData(imageData, 0, 0);
 }
 
-function blur() {//BLUR 3x3
+function blur() { //BLUR 3x3
   ctx.drawImage(imagen, 0, 0, imageScaledWidth, imageScaledHeight);
   let imageData = ctx.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
   for (let x = 0; x < imageData.width; x++) {
     for (let y = 0; y < imageData.height; y++) {
       let kernelx = [x-1,x,x+1,
                       x-1,x,x+1,
-                      x-1,x,x+1];
+                      x-1,x,x+1]; //se definen los arreglos con las operaciones a realizar en cada pixel
       let kernely = [y-1,y-1,y-1,
                       y,  y,  y,
                       y+1,y+1,y+1];
@@ -161,13 +161,14 @@ function blur() {//BLUR 3x3
       let sumab=0;
       let dividendo=0;
       for (var i = 0; i < kernelx.length; i++) {
-        if (!(kernelx[i]<0 || kernely[i]<0 || kernelx[i]>imageData.width-1 || kernely[i]>imageData.height-1)) {
+        if (!(kernelx[i]<0 || kernely[i]<0 || kernelx[i]>imageData.width-1 || kernely[i]>imageData.height-1)) { //se suman los valores de cada pixel luego de aplicar las operaciones definidas en los kernel
           sumar=sumar+getR(imageData,kernelx[i],kernely[i]);
           sumag=sumag+getG(imageData,kernelx[i],kernely[i]);
           sumab=sumab+getB(imageData,kernelx[i],kernely[i]);
           dividendo++;
         }
       }
+      //se guarda cada pixel con el valor resultante del promedio de la suma de los valores
       setR(imageData,x,y,sumar/dividendo);
       setG(imageData,x,y,sumag/dividendo);
       setB(imageData,x,y,sumab/dividendo);
@@ -176,7 +177,7 @@ function blur() {//BLUR 3x3
   ctx.putImageData(imageData, 0, 0);
 }
 
-function saturacion() {
+function saturacion() { //filtro de saturacion
   ctx.drawImage(imagen, 0, 0, imageScaledWidth, imageScaledHeight);
   let imageData = ctx.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
   let saturacion = document.querySelector("#saturacion").value;
@@ -184,7 +185,7 @@ function saturacion() {
   for (let x = 0; x < imageData.width; x++) {
       for (let y = 0; y < imageData.height; y++) {
         pixel = rgbToHsl(getR(imageData,x,y),getG(imageData,x,y),getB(imageData,x,y));
-        pixel[1] = pixel[1]*saturacion;
+        pixel[1] = pixel[1]*saturacion;  //multiplica el valor de saturacion hsl por el valor de saturacion que se quiere dar
         pixel = hslToRgb(pixel[0],pixel[1],pixel[2]);
         setR(imageData,x,y,pixel[0]);
         setG(imageData,x,y,pixel[1]);
@@ -194,42 +195,42 @@ function saturacion() {
     ctx.putImageData(imageData, 0, 0);
 }
 
-function conservarCambio() {
+function conservarCambio() { //guarda la capa actual para trabajar a partir de ella
   imagen = new Image();
   imagen.src = canvas.toDataURL();
 }
 
-function getR (imageData,x,y){
+function getR (imageData,x,y){ //devuelve valor rojo del pixel
   let index = (x+y*imageData.width)*4;
   return imageData.data[index];
 }
 
-function getG (imageData,x,y){
+function getG (imageData,x,y){ //devuelve valor verde del pixel
   let index = (x+y*imageData.width)*4;
   return imageData.data[index+1];
 }
 
-function getB (imageData,x,y){
+function getB (imageData,x,y){ //devuelve valor azul del pixel
   let index = (x+y*imageData.width)*4;
   return imageData.data[index+2];
 }
 
-function setR (imageData,x,y,value){
+function setR (imageData,x,y,value){ //cambia valor rojo del pixel
   let index = (x+y*imageData.width)*4;
   imageData.data[index]=value;
 }
 
-function setG (imageData,x,y,value){
+function setG (imageData,x,y,value){ //cambia valor verde del pixel
   let index = (x+y*imageData.width)*4;
   imageData.data[index+1]=value;
 }
 
-function setB (imageData,x,y,value){
+function setB (imageData,x,y,value){ //cambia valor azul del pixel
   let index = (x+y*imageData.width)*4;
   imageData.data[index+2]=value;
 }
 
-function rgbToHsl(r, g, b){
+function rgbToHsl(r, g, b){ //pasa los pixeles de valor rgb a hsl
     r /= 255, g /= 255, b /= 255;
     var max = Math.max(r, g, b), min = Math.min(r, g, b);
     var h, s, l = (max + min) / 2;
@@ -249,7 +250,7 @@ function rgbToHsl(r, g, b){
     return [h, s, l];
 }
 
-function hslToRgb(h, s, l){
+function hslToRgb(h, s, l){ //pasa los pixeles de valor hsl a rgb
     var r, g, b;
 
     if(s == 0){
@@ -274,7 +275,7 @@ function hslToRgb(h, s, l){
 }
 
 window.onload= eventos();
-function eventos() {
+function eventos() { //agrega eventos a la barra de herramientas
   document.querySelector('#pincel').addEventListener("click",pincel);
   document.querySelector('#borrador').addEventListener("click",borrador);
   document.querySelector('#puntero').addEventListener("click",punteroNormal);
