@@ -42,7 +42,7 @@ class Tablero {
     return false;
   }
   hayganador(jugador){ //falta buscar ganadores con lineas >4
-    if (dificultad=0) {
+    if (this.dificultad=0) {
       for (let x = 0; x < this.matriz.length; x++) {
         for (let y = this.matriz[x].length-1; y >= 0 ; y--) {
           if (this.matriz[x][y].getficha()!=null && this.matriz[x][y].getficha().getjugador()==jugador){
@@ -59,7 +59,7 @@ class Tablero {
         }
       }
       return false;
-    }else if (dificultad=1) {
+    }else if (this.dificultad=1) {
       for (let x = 0; x < this.matriz.length; x++) {
         for (let y = this.matriz[x].length-1; y >= 0 ; y--) {
           if (this.matriz[x][y].getficha()!=null && this.matriz[x][y].getficha().getjugador()==jugador){
@@ -76,7 +76,7 @@ class Tablero {
         }
       }
       return false;
-    }else if (dificultad=2) {
+    }else if (this.dificultad=2) {
       for (let x = 0; x < this.matriz.length; x++) {
         for (let y = this.matriz[x].length-1; y >= 0 ; y--) {
           if (this.matriz[x][y].getficha()!=null && this.matriz[x][y].getficha().getjugador()==jugador){
@@ -93,7 +93,7 @@ class Tablero {
         }
       }
       return false;
-    }else if (dificultad=3) {
+    }else if (this.dificultad=3) {
       for (let x = 0; x < this.matriz.length; x++) {
         for (let y = this.matriz[x].length-1; y >= 0 ; y--) {
           if (this.matriz[x][y].getficha()!=null && this.matriz[x][y].getficha().getjugador()==jugador){
