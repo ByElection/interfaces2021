@@ -5,10 +5,8 @@ let ultimaficha;
 juegonuevo();
 
 function juegonuevo(){
-  let filas = document.querySelector("#filas").value;
-  let columnas = document.querySelector("#columnas").value;
-  let linea =document.querySelector("#linea").value;
-  tablero = new Tablero(columnas,filas,linea);
+  let dificultad = document.querySelector("#dificultad").value;
+  tablero = new Tablero(dificultad);
   jugadores = new Array(new Jugador(1,28),new Jugador(2,28));
   turno = 2;
   cambiaturno();
