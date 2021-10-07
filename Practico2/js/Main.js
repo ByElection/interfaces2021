@@ -5,9 +5,14 @@ let ultimaficha;
 juegonuevo();
 
 function juegonuevo(){
+  if (jugadores!=null){
+    jugadores[0].countdown.parar();
+    jugadores[1].countdown.parar();
+  }
   let dificultad = document.querySelector("#dificultad").value;
   tablero = new Tablero(dificultad);
-  jugadores = new Array(new Jugador(1,28),new Jugador(2,28));
+  let time = 5/(dificultad*2+1);
+  jugadores = new Array(new Jugador(1,28,time),new Jugador(2,28,time));
   turno = 2;
   cambiaturno();
   actualizar();
@@ -81,8 +86,12 @@ canvas.addEventListener("mouseup",function() {
 
 function cambiaturno() {
   if (turno==1) {
+    jugadores[turno-1].countdown.parar();
     turno=2;
+    jugadores[turno-1].countdown.correr();
   }else {
+    jugadores[turno-1].countdown.parar();
     turno=1;
+    jugadores[turno-1].countdown.correr();
   }
 }
