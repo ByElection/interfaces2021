@@ -1,5 +1,5 @@
 class Ficha extends Figura {
-  constructor(x,y,jugador) {
+  constructor(x,y,jugador,imagen,color) {
     if (jugador==1) {
       super(x,y);
       this.xorigen=x;
@@ -10,17 +10,14 @@ class Ficha extends Figura {
     this.yorigen=y;
     this.usada=false;
     this.radio=20;
-    this.imagen = document.querySelector("#imagenficha");
+    this.setImagen(imagen);
+    this.setColor(color);
     this.jugador=jugador;
     this.dibujar();
   }
   dibujar(){
     this.ctx.beginPath();
-    if (this.jugador == 1){
-      this.ctx.fillStyle = "cyan";
-    }else if (this.jugador==2) {
-      this.ctx.fillStyle = "magenta";
-    }
+    this.ctx.fillStyle = this.color;
     this.ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
     this.ctx.fill();
     this.ctx.drawImage(this.imagen, this.x-this.radio, this.y-this.radio, this.width-this.radio/2, this.height-this.radio/2);
@@ -47,5 +44,11 @@ class Ficha extends Figura {
   }
   getjugador(){
     return this.jugador;
+  }
+  setImagen(imagen){
+    this.imagen = document.querySelector("#imagen"+imagen);
+  }
+  setColor(color){
+    this.color = color;
   }
 }

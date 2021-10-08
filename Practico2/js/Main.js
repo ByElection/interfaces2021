@@ -1,8 +1,10 @@
+
 let tablero;
 let jugadores;
 let turno;
 let ultimaficha;
-juegonuevo();
+window.onload = juegonuevo;
+
 
 function juegonuevo(){
   if (jugadores!=null){
@@ -12,30 +14,30 @@ function juegonuevo(){
   let dificultad = document.querySelector("#dificultad").value;
   tablero = new Tablero(dificultad);
   let time = 5/(dificultad*2+1);
-  jugadores = new Array(new Jugador(1,28,time),new Jugador(2,28,time));
+  jugadores = new Array(new Jugador(1,28,time,"cobweb","cyan"),new Jugador(2,28,time,"roulette","magenta"));
   turno = 2;
   cambiaturno();
   actualizar();
 }
+
+function getColor(jugador) {
+  return jugadores[jugador].getColor();
+}
+
 function borrarTodo(){
   let canvas = document.querySelector('#canvas');
   let ctx = canvas.getContext('2d');
   ctx.fillStyle = "#7C7C7C";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "cyan";
+  ctx.fillStyle = jugadores[0].getColor();
   ctx.font = "30px Arial";
   ctx.fillText("Jugador 1", 10, 30);
-  ctx.fillStyle = "magenta";
+  ctx.fillStyle = jugadores[1].getColor();
   ctx.font = "30px Arial";
   ctx.fillText("Jugador 2", canvas.width-150, 30);
   ctx.font = "30px Arial";
-  if (turno==1) {
-    ctx.fillStyle = "cyan";
-    ctx.fillText("Turno de Jugador 1", canvas.width/2-130, 30);
-  }else if(turno==2){
-    ctx.fillStyle = "magenta";
-    ctx.fillText("Turno de Jugador 2", canvas.width/2-130, 30);
-  }
+  ctx.fillStyle = jugadores[turno-1].getColor();
+  ctx.fillText("Turno de Jugador "+turno, canvas.width/2-130, 30);
 }
 
 function actualizar() {
@@ -69,13 +71,9 @@ canvas.addEventListener("mouseup",function() {
       ctx.fillStyle = "#7C7C7C";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.font = "100px Arial";
-      if (turno==2) {
-        ctx.fillStyle = "cyan";
-        ctx.fillText("Gano el Jugador 1", 0, canvas.height/2-100);
-      }else if(turno==1){
-        ctx.fillStyle = "magenta";
-        ctx.fillText("Gano el Jugador 2", 0, canvas.height/2-100);
-      }
+      cambiaturno();
+      ctx.fillStyle = jugadores[turno-1].getColor();
+      ctx.fillText("Gano el Jugador "+turno, 0, canvas.height/2-100);
     }else{
       actualizar();
     }
@@ -83,15 +81,27 @@ canvas.addEventListener("mouseup",function() {
   }
 })
 
+function perder(jugador){
+  let canvas = document.querySelector('#canvas');
+  let ctx = canvas.getContext('2d');
+  ctx.fillStyle = "#7C7C7C";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "100px Arial";
+  if (turno==1) {
+    turno=2;
+  }else {
+    turno=1;
+  }
+  ctx.fillStyle = jugadores[turno-1].getColor();
+  ctx.fillText("Gano el Jugador "+turno, 0, canvas.height/2-100);
+}
 
 function cambiaturno() {
+  jugadores[turno-1].countdown.parar();
   if (turno==1) {
-    jugadores[turno-1].countdown.parar();
     turno=2;
-    jugadores[turno-1].countdown.correr();
   }else {
-    jugadores[turno-1].countdown.parar();
     turno=1;
-    jugadores[turno-1].countdown.correr();
   }
+  jugadores[turno-1].correrCountdown();
 }
