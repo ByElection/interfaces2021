@@ -7,13 +7,9 @@ window.onload = juegonuevo;
 
 
 function juegonuevo(){
-  if (jugadores!=null){
-    jugadores[0].countdown.parar();
-    jugadores[1].countdown.parar();
-  }
   let dificultad = document.querySelector("#dificultad").value;
   tablero = new Tablero(dificultad);
-  let time = 5/(dificultad*2+1);
+  let time = 1.5*dificultad+1;
   jugadores = new Array(new Jugador(1,28,time,"cobweb","cyan"),new Jugador(2,28,time,"roulette","magenta"));
   turno = 2;
   cambiaturno();
@@ -74,6 +70,8 @@ canvas.addEventListener("mouseup",function() {
       cambiaturno();
       ctx.fillStyle = jugadores[turno-1].getColor();
       ctx.fillText("Gano el Jugador "+turno, 0, canvas.height/2-100);
+      jugadores[0].countdown.parar();
+      jugadores[1].countdown.parar();
     }else{
       actualizar();
     }
