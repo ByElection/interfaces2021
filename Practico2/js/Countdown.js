@@ -2,26 +2,25 @@ class Countdown {
   constructor(time,jugador) {
     this.canvas = document.querySelector('#canvas');
     this.ctx = canvas.getContext('2d');
-    this.time = Math.floor(time*60);
+    this.time = Math.floor(time*60); //GUARDA EL TIEMPO EN SEGUNDOS
     this.jugador=jugador;
   }
 
-  correr(){
-    let t=this;
+  correr(){ //HACE CORRER EL TIMER
+    let t=this; //DEFINE THIS PARA QUE LO RECONOZCA LA FUNCION DENTRO DEL INTERVAL
     this.interval = setInterval(function () {
+      t.dibujar();
       if (t.time==0){
         t.parar();
         perder(t.jugador);
-        return;
+      }else {
+        actualizar();
+        t.time--;
       }
-      actualizar();
-      t.time--;
-      this.ctx.fillstyle; //sin esto pone cronometro de otro color
-      t.dibujar();
     },1000)
   }
 
-  dibujar(){
+  dibujar(){ //DIBUJA EL CRONOMETRO
     let min = Math.floor( this.time / 60 );
     let sec = this.time % 60;
     if (sec < 10) sec = "0" + sec;
@@ -34,7 +33,7 @@ class Countdown {
     }
   }
 
-  parar(){
+  parar(){ //PARA EL CRONOMETRO
     clearInterval(this.interval);
   }
 

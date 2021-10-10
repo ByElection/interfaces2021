@@ -6,7 +6,7 @@ let ultimaficha;
 window.onload = juegonuevo;
 
 
-function juegonuevo(){
+function juegonuevo(){ //EMPIEZA UN JUEGO NUEVO
   let dificultad = document.querySelector("#dificultad").value;
   tablero = new Tablero(dificultad);
   let time = 1.5*dificultad+1;
@@ -14,13 +14,14 @@ function juegonuevo(){
   turno = 2;
   cambiaturno();
   actualizar();
+  addEvents();
 }
 
-function getColor(jugador) {
+function getColor(jugador) { //dice el color del jugador
   return jugadores[jugador].getColor();
 }
 
-function borrarTodo(){
+function actualizar() { //BORRA EL CANVAS Y LO VUELVE A DIBUJAR
   let canvas = document.querySelector('#canvas');
   let ctx = canvas.getContext('2d');
   ctx.fillStyle = "#7C7C7C";
@@ -34,68 +35,32 @@ function borrarTodo(){
   ctx.font = "30px Arial";
   ctx.fillStyle = jugadores[turno-1].getColor();
   ctx.fillText("Turno de Jugador "+turno, canvas.width/2-130, 30);
-}
-
-function actualizar() {
-  borrarTodo();
   tablero.dibujar();
   for (let i = 0; i < jugadores.length; i++) {
     jugadores[i].dibujar();
   }
 }
-document.querySelector("#juegonuevo").addEventListener("click",juegonuevo);
 
-canvas.addEventListener("mousedown",function(e) {
-  ultimaficha=jugadores[turno-1].buscarFicha(e.layerX,e.layerY);
-});
-
-canvas.addEventListener("mousemove",moverfichitas);
-function moverfichitas(e) {
-  if (ultimaficha != null){
-    ultimaficha.mover(e.layerX,e.layerY);
-    actualizar();
-  }
-}
-canvas.addEventListener("mouseup",function() {
-  if (ultimaficha!=null) {
-    if (!tablero.setficha(ultimaficha)){
-      ultimaficha.moverorigen();
-    }
-    if (tablero.hayganador(ultimaficha.getjugador())){
-      let canvas = document.querySelector('#canvas');
-      let ctx = canvas.getContext('2d');
-      ctx.fillStyle = "#7C7C7C";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = "100px Arial";
-      cambiaturno();
-      ctx.fillStyle = jugadores[turno-1].getColor();
-      ctx.fillText("Gano el Jugador "+turno, 0, canvas.height/2-100);
-      jugadores[0].countdown.parar();
-      jugadores[1].countdown.parar();
-    }else{
-      actualizar();
-    }
-    ultimaficha=null;
-  }
-})
-
-function perder(jugador){
+function ganar(jugador){ //HACE GANAR A JUGADOR
   let canvas = document.querySelector('#canvas');
   let ctx = canvas.getContext('2d');
   ctx.fillStyle = "#7C7C7C";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.font = "100px Arial";
-  if (turno==1) {
-    turno=2;
-  }else {
-    turno=1;
-  }
-  ctx.fillStyle = jugadores[turno-1].getColor();
-  ctx.fillText("Gano el Jugador "+turno, 0, canvas.height/2-100);
+  ctx.fillStyle = jugadores[jugador-1].getColor();
+  ctx.fillText("Gano el Jugador "+jugador, 0, canvas.height/2-100);
 }
 
-function cambiaturno() {
-  jugadores[turno-1].countdown.parar();
+function perder(jugador) { //HACE PERDER A JUGADOR
+  if (jugador==1) {
+    ganar(2)
+  }else {
+    ganar(1);
+  }
+}
+
+function cambiaturno() { //CAMBIA EL TURNO Y LOS TIMER DE LOS JUGADORES
+  jugadores[turno-1].pararCountdown();
   if (turno==1) {
     turno=2;
   }else {
@@ -103,3 +68,45 @@ function cambiaturno() {
   }
   jugadores[turno-1].correrCountdown();
 }
+
+function agarrarFicha(e) { //AGARRA UNA FICHA
+  ultimaficha=jugadores[turno-1].buscarFicha(e.layerX,e.layerY);
+}
+
+function moverFicha(e) { //MUEVE LA FICHA
+  if (ultimaficha != null){
+    ultimaficha.mover(e.layerX,e.layerY);
+    actualizar();
+  }
+}
+
+function soltarFicha() { //SUELTA LA FICHA
+  if (ultimaficha!=null) { //si existe una ultima ficha tocada
+    let jugador = ultimaficha.getjugador(); //guarda el duenio
+    if (!tablero.setficha(ultimaficha)){ //si no se coloco en el tablero
+      ultimaficha.moverorigen();//devuelva la ficha al origen
+    }
+    if (tablero.hayganador(jugador)){ //si hay ganador
+      jugadores[turno-1].pararCountdown(); //para el timer
+      removeEvents(); //apaga los eventos del mouse
+      ganar(jugador); //hace ganar al ganador
+    }else{
+      actualizar(); //si no hay ganador actualiza el tablero
+    }
+    ultimaficha=null;//ovida la ultima ficha
+  }
+}
+
+function addEvents() { //AGREGA EVENTOS PARA LAS FICHAS
+  canvas.addEventListener("mousedown",agarrarFicha);
+  canvas.addEventListener("mousemove",moverFicha);
+  canvas.addEventListener("mouseup",soltarFicha);
+}
+
+function removeEvents() { //BORRA EVENTOS PARA LAS FICHAS
+  canvas.removeEventListener("mousedown",agarrarFicha);
+  canvas.removeEventListener("mousemove",moverFicha);
+  canvas.removeEventListener("mouseup",soltarFicha);
+}
+
+document.querySelector("#juegonuevo").addEventListener("click",juegonuevo);
