@@ -1,5 +1,7 @@
 class Ficha extends Figura {
-  constructor(x,y,jugador,imagen,color) {//crea la ficha en la pocision del lado del jugador y guarda el origen para volver a su lugar en caso de movimiento erroneo
+  constructor(jugador,imagen,color) {//crea la ficha en la pocision del lado del jugador y guarda el origen para volver a su lugar en caso de movimiento erroneo
+    let x=Math.floor(Math.random() * (151 - 25)) + 25;
+    let y=Math.floor(Math.random() * (501 - 75)) + 75;
     if (jugador==1) {
       super(x,y);
       this.xorigen=x;

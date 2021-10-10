@@ -5,11 +5,7 @@ class Jugador {
     this.fichas=[];
     this.countdown = new Countdown(time,jugador,color);
     for (let i = 0; i < cantfichas; i++) { //crea las fichas del jugador
-        if (i%2==1) {
-          this.fichas[i] = new Ficha(50,75+50*i/2,this.jugador,imagen,this.color);
-        }else{
-          this.fichas[i] = new Ficha(100,75+50*i/2,this.jugador,imagen,this.color);
-        }
+        this.fichas[i] = new Ficha(this.jugador,imagen,this.color);
     }
   }
   dibujar(){ //dibuja las fichas y el timer

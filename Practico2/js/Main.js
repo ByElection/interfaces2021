@@ -3,6 +3,10 @@ let tablero;
 let jugadores;
 let turno;
 let ultimaficha;
+let skinj1={imagen:"cobweb",
+            color:"cyan"};
+let skinj2={imagen:"chip",
+            color:"magenta"};
 window.onload = juegonuevo;
 
 
@@ -10,7 +14,7 @@ function juegonuevo(){ //EMPIEZA UN JUEGO NUEVO
   let dificultad = document.querySelector("#dificultad").value;
   tablero = new Tablero(dificultad);
   let time = 1.5*dificultad+1;
-  jugadores = new Array(new Jugador(1,28,time,"cobweb","cyan"),new Jugador(2,28,time,"roulette","magenta"));
+  jugadores = new Array(new Jugador(1,21*(dificultad+1),time,skinj1.imagen,skinj1.color),new Jugador(2,21*(dificultad+1),time,skinj2.imagen,skinj2.color));
   turno = 2;
   cambiaturno();
   actualizar();
@@ -86,7 +90,7 @@ function soltarFicha() { //SUELTA LA FICHA
     if (!tablero.setficha(ultimaficha)){ //si no se coloco en el tablero
       ultimaficha.moverorigen();//devuelva la ficha al origen
     }
-    if (tablero.hayganador(jugador)){ //si hay ganador
+    if (tablero.hayganador(jugador)){ //si el jugador gano
       jugadores[turno-1].pararCountdown(); //para el timer
       removeEvents(); //apaga los eventos del mouse
       ganar(jugador); //hace ganar al ganador
