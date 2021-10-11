@@ -3,11 +3,14 @@ let tablero;
 let jugadores;
 let turno;
 let ultimaficha;
-let skinj1={imagen:"cobweb",
+let skinj1={imagen:"ficha",
             color:"cyan"};
-let skinj2={imagen:"chip",
+let skinj2={imagen:"trex",
             color:"magenta"};
-window.onload = juegonuevo;
+window.onload = function() {
+  addConfigEvents();
+  juegonuevo();
+}
 
 
 function juegonuevo(){ //EMPIEZA UN JUEGO NUEVO
@@ -53,13 +56,15 @@ function ganar(jugador){ //HACE GANAR A JUGADOR
   ctx.font = "100px Arial";
   ctx.fillStyle = jugadores[jugador-1].getColor();
   ctx.fillText("Gano el Jugador "+jugador, 0, canvas.height/2-100);
+  jugadores[0]=null;
+  jugadores[1]=null;
 }
 
 function perder(jugador) { //HACE PERDER A JUGADOR
   if (jugador==1) {
-    ganar(2)
+    setTimeout(ganar,100,2);
   }else {
-    ganar(1);
+    setTimeout(ganar,100,1);
   }
 }
 
@@ -93,7 +98,7 @@ function soltarFicha() { //SUELTA LA FICHA
     if (tablero.hayganador(jugador)){ //si el jugador gano
       jugadores[turno-1].pararCountdown(); //para el timer
       removeEvents(); //apaga los eventos del mouse
-      ganar(jugador); //hace ganar al ganador
+      setTimeout(ganar,100,jugador); //hace ganar al ganador
     }else{
       actualizar(); //si no hay ganador actualiza el tablero
     }
@@ -113,4 +118,42 @@ function removeEvents() { //BORRA EVENTOS PARA LAS FICHAS
   canvas.removeEventListener("mouseup",soltarFicha);
 }
 
+function addConfigEvents(){ //agrega eventos a los botones que cambian el color e imagen de las fichas
+  let j1skinbuttoncolor = document.querySelectorAll(".j1 button.color") //captura todos los botones que cambian el color del jugador 1
+  for (let i = 0; i < j1skinbuttoncolor.length; i++) { //recorre los botones
+    j1skinbuttoncolor[i].addEventListener("click",function() { //agrega el evento click
+      skinj1.color=j1skinbuttoncolor[i].value; //guarda el valor por el que se cambio
+      if (jugadores[0]!=null){ //si existe jugador
+        jugadores[0].setColor(skinj1.color);//actualiza el color del jugador
+      }
+    });
+  }
+  let j2skinbuttoncolor = document.querySelectorAll(".j2 button.color") //captura todos los botones que cambian el color del jugador 2
+  for (let i = 0; i < j2skinbuttoncolor.length; i++) { //recorre los botones
+    j2skinbuttoncolor[i].addEventListener("click",function() { //agrega el evento click
+      skinj2.color=j2skinbuttoncolor[i].value; //guarda el valor por el que se cambio
+      if (jugadores[1]!=null){ //si existe jugador
+        jugadores[1].setColor(skinj2.color);//actualiza el color del jugador
+      }
+    });
+  }
+  let j1skinbuttonimagen = document.querySelectorAll(".j1 button.imagen") //captura todos los botones que cambian la imagen del jugador 1
+  for (let i = 0; i < j1skinbuttonimagen.length; i++) { //recorre los botones
+    j1skinbuttonimagen[i].addEventListener("click",function() { //agrega el evento click
+      skinj1.imagen=j1skinbuttonimagen[i].value; //guarda el valor por el que se cambio
+      if (jugadores[0]!=null){ //si existe jugador
+        jugadores[0].setImagen(skinj1.imagen);//actualiza la imagen del jugador
+      }
+    });
+  }
+  let j2skinbuttonimagen = document.querySelectorAll(".j2 button.imagen") //captura todos los botones que cambian la imagen del jugador 2
+  for (let i = 0; i < j2skinbuttonimagen.length; i++) { //recorre los botones
+    j2skinbuttonimagen[i].addEventListener("click",function() { //agrega el evento click
+      skinj2.imagen=j2skinbuttonimagen[i].value; //guarda el valor por el que se cambio
+      if (jugadores[1]!=null){ //si existe jugador
+        jugadores[1].setImagen(skinj2.imagen);//actualiza la imagen del jugador
+      }
+    });
+  }
+}
 document.querySelector("#juegonuevo").addEventListener("click",juegonuevo);

@@ -5,7 +5,7 @@ input{
   width: 50px;
 }
 label{
-  color: yellow;
+  color: black;
 }
 header img{
   display: block;
@@ -32,4 +32,61 @@ h1{
 }
 #cd2{
     text-align: right;
+}
+.bg-green{
+  background-color: green;
+}
+.nav-item{
+  margin: 3px;
+}
+
+.cyan {
+  background: cyan;
+}
+
+.magenta {
+  background: magenta;
+}
+
+.amarillo {
+  background: #FFFF00;
+}
+
+.verde {
+  background: #00FF00;
+}
+
+.azul {
+  background: #0000FF;
+}
+
+.rojo {
+  background: #FF0000;
+}
+img.skin{
+  width: 50px;
+  height: 50px;
+}
+
+.btn-circle.btn-xl {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-size: 24px;
+    line-height: 1.33;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
 }
