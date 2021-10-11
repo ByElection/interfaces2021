@@ -2,9 +2,9 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>4 en linea</title>
+    <title>NO A LA LINEA</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <header>
     <div class="row">
@@ -12,18 +12,132 @@
         <h1>NO A LA LINEA</h1>
       </div>
     </div>
+    <nav class="navbar navbar-dark bg-green justify-content-center">
+      <div class="dropdown">
+        <button id="cambiarfichas" type="button" class="btn btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/edit.png" alt="Cambiar Fichas" height="24px" ></button>
+        <div class="dropdown-menu" aria-labelledby="cambiarficha">
+          <h6 class="dropdown-header text-center">Cambiar Fichas</h6>
+          <h5 class="dropdown-header text-center">Jugador 1</h5>
+          <div class="j1 dropdown-item">
+            <div>
+              <h4 class="dropdown-header text-center">Color</h4>
+            </div>
+            <div class="button-group d-flex justify-content-center">
+              <button type="button" class="color cyan btn btn-circle btn-xl" value="cyan"></button>
+              <button type="button" class="color magenta btn btn-circle btn-xl" value="magenta"></button>
+              <button type="button" class="color amarillo btn btn-circle btn-xl" value="#FFFF00"></button>
+            </div>
+            <div class="button-group d-flex justify-content-center">
+              <button type="button" class="color verde btn btn-circle btn-xl" value="#00FF00"></button>
+              <button type="button" class="color azul btn btn-circle btn-xl" value="#0000FF"></button>
+              <button type="button" class="color rojo btn btn-circle btn-xl" value="#FF0000"></button>
+            </div>
+          </div>
+          <div class="j1 dropdown-item">
+            <div>
+              <h4 class="dropdown-header text-center">Imagen</h4>
+            </div>
+            <div class="button-group">
+              <button type="button" class="imagen btn btn-info nav-item" value="ficha">
+                <img src="img/ficha.png" class="skin" id="imagenficha" name="ficha">
+              </button>
+              <button type="button" class="imagen btn btn-info nav-item" value="chip">
+                <img src="img/chip.png" class="skin" id="imagenchip" name="chip">
+              </button>
+              <button type="button" class="imagen btn btn-info nav-item" value="cobweb">
+                <img src="img/cobweb.png" class="skin" id="imagencobweb" name="cobweb">
+              </button>
+            </div>
+            <div class="button-group">
+              <button type="button" class="imagen btn btn-info nav-item" value="pokerchip">
+                <img src="img/pokerchip.png" class="skin" id="imagenpokerchip" name="pokerchip">
+              </button>
+              <button type="button" class="imagen btn btn-info nav-item" value="roulette">
+                <img src="img/roulette.png" class="skin" id="imagenroulette" name="roulette">
+              </button>
+              <button type="button" class="imagen btn btn-info nav-item" value="trex">
+                <img src="img/trex.png" class="skin" id="imagentrex" name="trex">
+              </button>
+            </div>
+          </div>
+          <h5 class="dropdown-header text-center">Jugador 2</h5>
+          <div class="j2 dropdown-item">
+            <div>
+              <h4 class="dropdown-header text-center">Color</h4>
+            </div>
+            <div class="button-group d-flex justify-content-center">
+              <button type="button" class="color cyan btn btn-circle btn-xl" value="cyan"></button>
+              <button type="button" class="color magenta btn btn-circle btn-xl" value="magenta"></button>
+              <button type="button" class="color amarillo btn btn-circle btn-xl" value="#FFFF00"></button>
+            </div>
+            <div class="button-group d-flex justify-content-center">
+              <button type="button" class="color verde btn btn-circle btn-xl" value="#00FF00"></button>
+              <button type="button" class="color azul btn btn-circle btn-xl" value="#0000FF"></button>
+              <button type="button" class="color rojo btn btn-circle btn-xl" value="#FF0000"></button>
+            </div>
+          </div>
+          <div class="j2 dropdown-item">
+            <div>
+              <h4 class="dropdown-header text-center">Imagen</h4>
+            </div>
+            <div class="button-group">
+              <button type="button" class="imagen btn btn-info nav-item" value="ficha">
+                <img src="img/ficha.png" class="skin" name="ficha">
+              </button>
+              <button type="button" class="imagen btn btn-info nav-item" value="chip">
+                <img src="img/chip.png" class="skin" name="chip">
+              </button>
+              <button type="button" class="imagen btn btn-info nav-item" value="cobweb">
+                <img src="img/cobweb.png" class="skin" name="cobweb">
+              </button>
+            </div>
+            <div class="button-group">
+              <button type="button" class="imagen btn btn-info nav-item" value="pokerchip">
+                <img src="img/pokerchip.png" class="skin" name="pokerchip">
+              </button>
+              <button type="button" class="imagen btn btn-info nav-item" value="roulette">
+                <img src="img/roulette.png" class="skin" name="roulette">
+              </button>
+              <button type="button" class="imagen btn btn-info nav-item" value="trex">
+                <img src="img/trex.png" class="skin" name="trex">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="ayuda" type="button" class="btn btn-info nav-item" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/ayuda.png" alt="Ayuda" height="24px" ></button>
+        <div class="dropdown-menu text-center">
+            <h6 class="dropdown-header">Ayuda</h6>
+            <h5 class="dropdown-header">¿Como jugar?</h5>
+            <div class="dropdown-item">
+              <p>Coloque las fichas en las tolvas de las columnas</p>
+              <p>para formar lineas en el tablero y hacerte con la victoria.</p>
+            </div>
+            <h5 class="dropdown-header">Siempre puede cambiar su skin en el boton de configuraciones</h5>
+        </div>
+      </div>
+      <label class="nav-item">Dificultad:</label>
+      <select id="dificultad" class="nav-item form-select">
+        <option value="0" selected>4 en Linea</option>
+        <option value="1">5 en Linea</option>
+        <option value="2">6 en Linea</option>
+        <option value="3">7 en Linea</option>
+      </select>
+      <button id="juegonuevo" class="btn btn-info nav-item" type="button">Juego Nuevo</button>
+    </nav>
   </header>
   <body id="body">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-5"></div>
-        <div class="col-5">
-          <label>Columnas: </label><input id="columnas" type="number" value="7" max="15">
-          <label>Filas: </label><input id="filas" type="number" value="6" max="13">
-          <label>Linea: </label><input id="linea" type="number" value="4" max="10">
-          <button id="juegonuevo" class="btn btn-primary" type="button">Juego Nuevo</button>
+        <div class="col-4"></div>
+        <div class="col-4">
+          <div class="row">
+            <div class="col-6 cd" id="cd1"></div>
+            <div class="col-6 cd" id="cd2"></div>
+          </div>
         </div>
-        <div class="col-2"></div>
+        <div class="col-4"></div>
       </div>
       <div class="row">
         <div class="col-12">
@@ -31,18 +145,18 @@
         </div>
       </div>
       <img src="img/celda.png" id="imagencelda" hidden>
-      <img src="img/ficha.png" id="imagenficha" hidden>
       <img src="img/tolva.png" id="imagentolva" hidden>
       <script type="text/javascript" src="js/Figura.js"></script>
       <script type="text/javascript" src="js/Celda.js"></script>
       <script type="text/javascript" src="js/Ficha.js"></script>
       <script type="text/javascript" src="js/Tolva.js"></script>
       <script type="text/javascript" src="js/Tablero.js"></script>
+      <script type="text/javascript" src="js/Countdown.js"></script>
       <script type="text/javascript" src="js/Jugador.js"></script>
       <script type="text/javascript" src="js/Main.js"></script>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </div>
   </body>
 </html>
