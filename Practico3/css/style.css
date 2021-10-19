@@ -1,0 +1,33 @@
+header{
+  background-color: rgba(42,63,144,1);
+}
+#juego{
+  transform: translateY(20vh) scale(3);
+  width: 512px;
+  height: 180px;
+  background-color: rgba(140, 214, 4, 1);
+}
+#adornos{
+  background-image: url("../img/TrackParts.png");
+  background-position-x: -28px;
+  background-position-y: -292px;
+  height: 64px;
+}
+@keyframes largada {
+
+}
+@keyframes trackmove {
+  0% {
+    background-position-x: 0%;
+  }
+  100% {
+    background-position-x: 100%;
+  }
+}
+#track{
+  transform: translateY(50%);
+  height: 112px;
+  background-repeat: no-repeat;
+  animation: trackmove 20s linear;
+  animation-delay: 20s;
+}

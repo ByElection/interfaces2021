@@ -1,6 +1,6 @@
 class TrackPart extends ObjetoSolido {
   constructor(id) {
-    if (id!=0 && id!=20 && id!=21 && id!=22 && id!=23){
+    if (id!=0 && id!=20 && id!=21){
       id=Math.floor(Math.random()*50);
       if (id>19 && id<50) {
         id=0;
@@ -12,7 +12,7 @@ class TrackPart extends ObjetoSolido {
       w=w*2;
     }else if (id==2 || id==5 || id==6 || id==7) {
       w=w*3;
-    }else if (id==21 || id==22 || id==23) {
+    }else if (id==21) {
       w=w*4;
     }else if (id==3 || id==4) {
       w=w*5;
@@ -78,11 +78,7 @@ class TrackPart extends ObjetoSolido {
       trackpos=1472;
     }else  if (this.id==20){
       trackpos=1696;
-    }else if (this.id==21){
-      trackpos=0;
-    }else if (this.id==22){
-      trackpos=64;
-    }else{
+    }else {
       trackpos=128;
     }
     let imageData = this.ctx.getImageData(0,0,pos+1,this.canvas.height);
