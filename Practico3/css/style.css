@@ -13,8 +13,20 @@ header{
   background-position-y: -292px;
   height: 64px;
 }
-@keyframes largada {
-
+@keyframes darlargada {
+  0%,49%{
+    opacity: 1;
+    background-position-x: -10px;
+    background-position-y: -16px;
+  }
+  50%,99%{
+    opacity: 1;
+    background-position-x: -74px;
+    background-position-y: -16px;
+  }
+  100%{
+    opacity: 0;
+  }
 }
 @keyframes trackmove {
   0% {
@@ -23,6 +35,17 @@ header{
   100% {
     background-position-x: 100%;
   }
+}
+#largada{
+  background-image: url("../img/ExcitebikeTracks.png");
+  transform: translateX(32px);
+  opacity: 0;
+  width: 64px;
+  height: 112px;
+  background-repeat: no-repeat;
+  animation: darlargada 3s steps(3) infinite;
+  animation-delay: 17s;
+  animation-iteration-count: 1;
 }
 #track{
   transform: translateY(50%);
