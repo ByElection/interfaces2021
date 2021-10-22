@@ -2,9 +2,8 @@ header{
   background-color: rgba(42,63,144,1);
 }
 #juego{
-  transform: translateY(20vh) scale(3);
-  width: 512px;
-  height: 180px;
+  width: 800px;
+  height: 600px;
   background-color: rgba(140, 214, 4, 1);
 }
 #adornos{
@@ -14,17 +13,14 @@ header{
   height: 64px;
 }
 @keyframes darlargada {
-  0%,49%{
+  0%,40%{
     opacity: 1;
-    background-position-x: -10px;
-    background-position-y: -16px;
   }
-  50%,99%{
+  40%,70%{
     opacity: 1;
     background-position-x: -74px;
-    background-position-y: -16px;
   }
-  100%{
+  70%,100%{
     opacity: 0;
   }
 }
@@ -36,21 +32,43 @@ header{
     background-position-x: 100%;
   }
 }
+@keyframes motor {
+  0% {
+    background-position: -33px -5px;
+  }
+  50% {
+    background-position: -57px -5px;
+  }
+}
 #largada{
   background-image: url("../img/ExcitebikeTracks.png");
+  position: absolute;
   transform: translateX(32px);
-  opacity: 0;
+  background-position-x: -10px;
+  background-position-y: -16px;
   width: 64px;
   height: 112px;
   background-repeat: no-repeat;
-  animation: darlargada 3s steps(3) infinite;
-  animation-delay: 17s;
-  animation-iteration-count: 1;
 }
 #track{
-  transform: translateY(50%);
+  transform: translateX(200px) translateY(376px) scale(2);
+  position: absolute;
+  width: 400px;
   height: 112px;
   background-repeat: no-repeat;
-  animation: trackmove 20s linear;
-  animation-delay: 20s;
+}
+.bike{
+  background-image: url("../img/Bike.png");
+  position: absolute;
+  transform:translateX(16px) translateY(70px);
+  width: 20px;
+  height: 21px;
+  background-position-x: -5px;
+  background-position-y: -5px;
+  animation: motor 0.5s steps(1) infinite;
+}
+.biker{
+  opacity:0;
+  width: ;
+  height: ;
 }

@@ -23,12 +23,46 @@ class TrackPart extends ObjetoSolido {
     }else if (id==19) {
       w=w*14;
     }
-    super(posx,0,w);
-    this.imagen
+    let h;
+    if (id==0 || id==11 || id==12 || id==13 || id==14 || id==15 || id==16 || id==17 || id==21) {
+      h=0;
+    }else if (id==1) {
+      h=10;
+    }else if (id==2) {
+      h=18;
+    }else if (id==3 || id==5) {
+      h=34;
+    }else if (id==4) {
+      h=16;
+    }else if (id==6 || id==7) {
+      h=26;
+    }else if (id==8) {
+      h=15;
+    }else if (id==9 || id==10) {
+      h=7;
+    }else if (id==20) {
+      h=25;
+    }
+    super(posx,h,w);
+    this.imagen;
     this.id=id;
     this.canvas = document.querySelector('canvas#TrackGenerator');
     this.ctx = this.canvas.getContext('2d');
-    this.roads=new Array(4);
+    if (this.id==19) {
+      this.roads=new Array(6);
+    }else {
+      this.roads=new Array(4);
+    }
+    for (var i = 0; i < this.roads.length; i++) {
+      this.roads[i]=new Array(this.w);
+    }
+    if (this.id==0 || this.id==11 || this.id==12 || this.id==13 || this.id==14 || this.id==15 || this.id==16 || this.id==17 || this.id==21) {
+      this.anguloentrada=0;
+      this.angulosalida=0;
+    }else if (this.id==1 || this.id==2 || this.id==3 || this.id==4 || this.id==5) {
+      this.anguloentrada=this.teoremaSeno(this.w/2);
+      this.angulosalida=this.teoremaSeno(this.w/2);
+    }
     this.dibujar();
   }
   dibujar(){
@@ -87,5 +121,8 @@ class TrackPart extends ObjetoSolido {
     this.ctx.putImageData(imageData,0,0);
     this.ctx.putImageData(imageDataTracks,pos,0);
     this.ctx.beginPath();
+  }
+  teoremaSeno(w){
+    return (this.h*Math.sin(1.5708))/Math.hypot(this.h,w);
   }
 }
