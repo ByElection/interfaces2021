@@ -2,14 +2,19 @@ header{
   background-color: rgba(42,63,144,1);
 }
 #juego{
-  width: 800px;
-  height: 600px;
-  background-color: rgba(140, 214, 4, 1);
+  transform:  translateX(200px) translateY(376px) scale(2);
+  width: 400px;
+  height: 300px;
 }
 #adornos{
-  background-image: url("../img/TrackParts.png");
-  background-position-x: -28px;
-  background-position-y: -292px;
+  background-color: rgba(140, 214, 4, 1);
+}
+#tribuna{
+  background-image: url("../img/Tribuna.png");
+  background-repeat: repeat-x;
+  height: 64px;
+}
+#personas{
   height: 64px;
 }
 @keyframes darlargada {
@@ -32,6 +37,14 @@ header{
     background-position-x: 100%;
   }
 }
+@keyframes adornosmove {
+  0% {
+    background-position-x: 65535px;
+  }
+  100% {
+    background-position-x: 0px;
+  }
+}
 @keyframes motor {
   0% {
     background-position: -33px -5px;
@@ -51,7 +64,6 @@ header{
   background-repeat: no-repeat;
 }
 #track{
-  transform: translateX(200px) translateY(376px) scale(2);
   position: absolute;
   width: 400px;
   height: 112px;
@@ -60,7 +72,7 @@ header{
 .bike{
   background-image: url("../img/Bike.png");
   position: absolute;
-  transform:translateX(16px) translateY(70px);
+  transform:translateX(32px) translateY(58px);
   width: 20px;
   height: 21px;
   background-position-x: -5px;
