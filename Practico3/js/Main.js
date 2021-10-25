@@ -1,12 +1,9 @@
 let pista;
-let bikes = new Array(4);
+
 
 function juegoNuevo() {
-  pista=new Track();
-  /*for (var i = 0; i < bikes.length; i++) {
-    bikes[i] = new Bike();
-  }*/
-  darlargada();
+  pista=new Track()
+  pista.darLargada();
 }
 
 function tracksToCanvas() {
@@ -17,15 +14,18 @@ function tracksToCanvas() {
   tracks.height=imagen.height-16;
   tracksctx.drawImage(imagen, -10, -16, imagen.width, imagen.height);
 }
-function darlargada(){
-  let largada = document.querySelector("#largada");
-  changeAnimation(largada,"darlargada",3,"steps(1) forwards"); //forwards para que frene cuando termina
-  let track = document.querySelector("#track");
-  changeAnimation(track,"trackmove",20,"linear 3s");
-  let tribuna = document.querySelector("#tribuna");
-  changeAnimation(tribuna,"adornosmove",1500,"linear infinite 3s");
-  let personas = document.querySelector("#personas");
-  changeAnimation(personas,"adornosmove",1500,"linear infinite 3s");
+
+function controles(event) {
+  let key= event.key;
+  if (key == "w" || key == "W") {
+    pista.moverMoto(0,"up");
+  }else if (key == "a" || key == "A") {
+    pista.cambiaInclinacion(0,"left");
+  }else if (key == "s" || key == "S") {
+    pista.moverMoto(0,"down");
+  }else if (key == "d" || key == "D") {
+    pista.cambiaInclinacion(0,"right");
+  }
 }
 
 function changeAnimation(element,keyframe,time,params) {
@@ -37,4 +37,5 @@ function changePlayState(element,state){
 window.onload= function() {
   tracksToCanvas();
   juegoNuevo();
+  document.addEventListener("keydown",controles);
 }
