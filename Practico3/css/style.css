@@ -47,9 +47,13 @@ header{
 }
 @keyframes motor {
   0% {
+    width: 20px;
+    height: 21px;
     background-position: -33px -5px;
   }
   50% {
+    width: 20px;
+    height: 21px;
     background-position: -57px -5px;
   }
 }
@@ -130,7 +134,75 @@ header{
   }
 }
 @keyframes levantada {
-
+  0%,25%{
+    width: 22px;
+    height: 24px;
+    background-position: -5px -142px;
+  }
+  26%,50%{
+    width: 22px;
+    height: 24px;
+    background-position: -31px -142px;
+  }
+  51%,75%{
+    width: 22px;
+    height: 24px;
+    background-position: -56px -142px;
+  }
+  76%,100%{
+    width: 22px;
+    height: 24px;
+    background-position: -94px -142px;
+  }
+}
+@keyframes mototirada {
+  0%,100%{
+    width: 22px;
+    height: 11px;
+    background-position: -65px -127px;
+  }
+}
+@keyframes bikercaido {
+  0%,9%{
+    opacity: 1;
+    background-position: -5px -122px;
+  }
+  10%,19%{
+    opacity: 1;
+    background-position: -27px -122px;
+  }
+  20%,29%{
+    opacity: 1;
+    background-position: -43px -122px;
+  }
+  30%,39%{
+    opacity: 1;
+    background-position: -27px -122px;
+  }
+  40%,49%{
+    opacity: 1;
+    background-position: -43px -122px;
+  }
+  50%,59%{
+    opacity: 1;
+    background-position: -27px -122px;
+  }
+  60%,69%{
+    opacity: 1;
+    background-position: -43px -122px;
+  }
+  70%,79%{
+    opacity: 1;
+    background-position: -27px -122px;
+  }
+  80%,89%{
+    opacity: 1;
+    background-position: -43px -122px;
+  }
+  90%,100%{
+    opacity: 1;
+    background-position: -27px -122px;
+  }
 }
 #largada{
   background-image: url("../img/ExcitebikeTracks.png");
@@ -158,7 +230,8 @@ header{
   background-position-y: -5px;
 }
 .biker{
+  background-image: url("../img/Bike.png");
   opacity:0;
-  width: ;
-  height: ;
+  width: 16px;
+  height: 16px;
 }
