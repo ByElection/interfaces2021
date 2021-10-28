@@ -204,6 +204,30 @@ header{
     background-position: -27px -122px;
   }
 }
+@keyframes doblaarriba {
+  0%{
+    width: 21px;
+    height: 21px;
+    background-position: -83px -5px;
+  }
+  100%{
+    width: 21px;
+    height: 21px;
+    background-position: -83px -5px;
+  }
+}
+@keyframes doblaabajo {
+  0%{
+    width: 21px;
+    height: 21px;
+    background-position: -106px -5px;
+  }
+  100%{
+    width: 21px;
+    height: 21px;
+    background-position: -106px -5px;
+  }
+}
 #largada{
   background-image: url("../img/ExcitebikeTracks.png");
   position: absolute;
@@ -221,13 +245,28 @@ header{
   background-repeat: no-repeat;
 }
 .bike{
-  background-image: url("../img/Bike.png");
   position: absolute;
-  transform:translateX(32px) translateY(58px);
+  transition: transform 0.2s linear;
   width: 20px;
   height: 21px;
   background-position-x: -5px;
   background-position-y: -5px;
+}
+.bike:nth-child(2){
+  background-image: url("../img/Bike.png");
+  transform:translateX(calc(var(--bike0posx)*1px)) translateY(calc(var(--bike0posy)*1px));
+}
+.bike:nth-child(3){
+  background-image: url("../img/BikeBlue.png");
+  transform:translateX(calc(var(--bike1posx)*1px)) translateY(calc(var(--bike1posy)*1px));
+}
+.bike:nth-child(4){
+  background-image: url("../img/BikePurple.png");
+  transform:translateX(calc(var(--bike2posx)*1px)) translateY(calc(var(--bike2posy)*1px));
+}
+.bike:nth-child(5){
+  background-image: url("../img/BikeBluePurple.png");
+  transform:translateX(calc(var(--bike3posx)*1px)) translateY(calc(var(--bike3posy)*1px));
 }
 .biker{
   background-image: url("../img/Bike.png");

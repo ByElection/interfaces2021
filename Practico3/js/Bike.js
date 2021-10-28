@@ -1,10 +1,12 @@
 class Bike extends ObjetoSolido{
   constructor(id) {
-    super(70-12*id,16*(id+1),20,21);
+    super(16*(id+1),70-12*id,20,21);
     this.id=id;
     this.bike = document.querySelectorAll(".bike")[id];
     this.inclinacion = 0;
-    document.body.style.setProperty('--inclinacion'+this.id,this.inclinacion);
+    setProperty('--inclinacion'+this.id,this.inclinacion);
+    setProperty('--bike'+this.id+'posy',this.posy);
+    setProperty('--bike'+this.id+'posx',this.posx);
   }
   cambiaInclinacion(direccion){
     if (direccion=="left") {
@@ -12,7 +14,7 @@ class Bike extends ObjetoSolido{
     }else if (direccion=="right") {
       this.inclinacion--;
     }
-    document.body.style.setProperty('--inclinacion'+this.id,this.inclinacion);
+    setProperty('--inclinacion'+this.id,this.inclinacion);
     if (this.inclinacion == 0) {
       this.prendeMotor(0);
     }else if (this.inclinacion>0 && this.inclinacion<6) {
@@ -23,10 +25,34 @@ class Bike extends ObjetoSolido{
       this.caerse();
     }
   }
+  cambiarCarril(direccion){
+    setProperty('--bike'+this.id+'posy',this.posy);
+    if (direccion == "up") {
+      changeAnimation(this.bike,"doblaarriba",0.2, "linear 1 forwards");
+      this.moveY(12);
+    }else {
+      changeAnimation(this.bike,"doblaabajo",0.2, "linear 1 forwards");
+      this.moveY(-12)
+    }
+    let bike=this.bike;
+    setTimeout(function() {
+      changeAnimation(bike,"motor",0.5,"steps(1) infinite");
+    },200)
+  }
+  moveX(value){
+    this.posx -= value;
+    setProperty('--bike'+this.id+'posx',this.posx);
+  }
+  moveY(value){
+    this.posy -= value;
+    setProperty('--bike'+this.id+'posy',this.posy);
+  }
   prendeMotor(delay){
     changeAnimation(this.bike,"motor",0.5,"steps(1) infinite "+delay+"s");
   }
   caerse(){
+    let track = document.querySelector("#track")
+    changePlayState(track,"paused");
     changeAnimation(this.bike,"caida",1,"steps(4) infinite");
     let bike = this.bike;
     let biker = document.querySelectorAll(".biker")[this.id];
@@ -38,6 +64,7 @@ class Bike extends ObjetoSolido{
         changeAnimation(biker,"",0,"");
         setTimeout(function() {
           changeAnimation(bike,"motor",0.5,"steps(1) infinite");
+          changePlayState(track,"running");
         },2000);
       },3000);
     },1000);

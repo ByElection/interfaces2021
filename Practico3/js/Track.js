@@ -23,14 +23,16 @@ class Track {
     }
     document.querySelector("#track").style.backgroundImage= "url("+canvas.toDataURL()+")";
     this.bikes = new Array(4);
-    //for (var i = 0; i < bikes.length; i++) {
-      this.bikes[0] = new Bike(0);
-    //}
+    for (var i = 0; i < this.bikes.length; i++) {
+      this.bikes[i] = new Bike(i);
+    }
   }
   darLargada(){
     let largada = document.querySelector("#largada");
     changeAnimation(largada,"darlargada",3,"steps(1) forwards"); //forwards para que frene cuando termina
-    this.bikes[0].prendeMotor(2);
+    for (var i = 0; i < this.bikes.length; i++) {
+      this.bikes[i].prendeMotor(2);
+    }
     let track = document.querySelector("#track");
     changeAnimation(track,"trackmove",20,"linear 3s forwards");
     let tribuna = document.querySelector("#tribuna");
@@ -41,7 +43,7 @@ class Track {
   cambiaInclinacion(idmoto,direccion){
     this.bikes[idmoto].cambiaInclinacion(direccion);
   }
-  moverMoto(idmoto,direccion){
-
+  cambiarCarril(idmoto,direccion){
+    this.bikes[idmoto].cambiarCarril(direccion);
   }
 }
