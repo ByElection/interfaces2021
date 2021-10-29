@@ -70,7 +70,10 @@ class Bike{
       },3000);
     },1000);
   }
-  getPosY(){
-    
+  setPiso(h){
+    setProperty("--pisobike"+this.id,h);
+  }
+  getPosX(){
+    return this.posx;
   }
 }

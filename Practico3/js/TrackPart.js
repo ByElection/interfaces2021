@@ -268,7 +268,7 @@ class TrackPart{
         for (let i = 0; i < 2; i++) {
           this.roads[road][i+5] = puntero-i*4;
         }
-        for (let i = 7; i < array.length; i++) {
+        for (let i = 7; i < this.roads[road].length; i++) {
           this.roads[road][i] = 0;
         }
       }else {

@@ -6,6 +6,44 @@ header{
   width: 400px;
   height: 300px;
 }
+@keyframes nubes {
+  from{
+    background-position: 0px;
+  }
+  to{
+    background-position: 600px;
+  }
+}
+@keyframes brillo {
+  from{
+    transform: rotate(0);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+#cielo{
+  position: absolute;
+  width: 800px;
+  height: 300px;
+  background-color: lightblue;
+}
+#nubes{
+  position: absolute;
+  background-image: url("../img/nubes.png");
+  width: 800px;
+  height: 300px;
+  background-repeat: repeat-x;
+  animation: nubes 20s linear infinite;
+}
+#sol{
+  position: absolute;
+  background-image: url("../img/sol.png");
+  background-size: cover;
+  width: 226px;
+  height: 155px;
+  animation: brillo 0.01s linear infinite;
+}
 #adornos{
   background-color: rgba(140, 214, 4, 1);
 }
@@ -254,19 +292,19 @@ header{
 }
 .bike:nth-child(2){
   background-image: url("../img/Bike.png");
-  transform:translateX(calc(var(--bike0posx)*1px)) translateY(calc(var(--bike0posy)*1px));
+  transform:translateX(calc(var(--bike0posx)*1px)) translateY(calc(calc(var(--bike0posy) + var(--pisobike0))*1px));
 }
 .bike:nth-child(3){
   background-image: url("../img/BikeBlue.png");
-  transform:translateX(calc(var(--bike1posx)*1px)) translateY(calc(var(--bike1posy)*1px));
+  transform:translateX(calc(var(--bike1posx)*1px)) translateY(calc(calc(var(--bike1posy) + var(--pisobike1))*1px));
 }
 .bike:nth-child(4){
   background-image: url("../img/BikePurple.png");
-  transform:translateX(calc(var(--bike2posx)*1px)) translateY(calc(var(--bike2posy)*1px));
+  transform:translateX(calc(var(--bike2posx)*1px)) translateY(calc(calc(var(--bike2posy) + var(--pisobike2))*1px));
 }
 .bike:nth-child(5){
   background-image: url("../img/BikeBluePurple.png");
-  transform:translateX(calc(var(--bike3posx)*1px)) translateY(calc(var(--bike3posy)*1px));
+  transform:translateX(calc(var(--bike3posx)*1px)) translateY(calc(calc(var(--bike3posy) + var(--pisobike3))*1px));
 }
 .biker{
   opacity:0;

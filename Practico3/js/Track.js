@@ -25,6 +25,7 @@ class Track {
     this.bikes = new Array(4);
     for (var i = 0; i < this.bikes.length; i++) {
       this.bikes[i] = new Bike(i);
+      this.bikes[i].setPiso(0);
     }
   }
   darLargada(){
