@@ -1,6 +1,7 @@
-class Bike extends ObjetoSolido{
+class Bike{
   constructor(id) {
-    super(16*(id+1),70-12*id,20,21);
+    this.posx=16*(id+1);
+    this.posy=70-12*id;
     this.id=id;
     this.bike = document.querySelectorAll(".bike")[id];
     this.inclinacion = 0;
@@ -68,5 +69,8 @@ class Bike extends ObjetoSolido{
         },2000);
       },3000);
     },1000);
+  }
+  getPosY(){
+    
   }
 }

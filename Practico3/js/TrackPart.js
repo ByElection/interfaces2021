@@ -1,4 +1,4 @@
-class TrackPart extends ObjetoSolido {
+class TrackPart{
   constructor(id) {
     if (id!=0 && id!=20 && id!=21){
       id=Math.floor(Math.random()*50);
@@ -6,44 +6,42 @@ class TrackPart extends ObjetoSolido {
         id=0;
       }
     }
-    let w = 16;
-    let posx;
+    this.w = 16;
     if (id==0 || id==1 || id==11 || id==12) {
-      w=w*2;
+      this.w=this.w*2;
     }else if (id==2 || id==5 || id==6 || id==7) {
-      w=w*3;
+      this.w=this.w*3;
     }else if (id==21) {
-      w=w*4;
+      this.w=this.w*4;
     }else if (id==3 || id==4) {
-      w=w*5;
+      this.w=this.w*5;
     }else if (id==17 || id==20) {
-      w=w*6;
+      this.w=this.w*6;
     }else if (id==15 || id==16 || id==18) {
-      w=w*13;
+      this.w=this.w*13;
     }else if (id==19) {
-      w=w*14;
+      this.w=this.w*14;
     }
-    let h;
+    this.h;
     if (id==0 || id==11 || id==12 || id==13 || id==14 || id==15 || id==16 || id==17 || id==21) {
-      h=0;
+      this.h=0;
     }else if (id==1) {
-      h=10;
+      this.h=10;
     }else if (id==2) {
-      h=18;
+      this.h=18;
     }else if (id==3 || id==5) {
-      h=34;
+      this.h=34;
     }else if (id==4) {
-      h=16;
+      this.h=16;
     }else if (id==6 || id==7) {
-      h=26;
+      this.h=26;
     }else if (id==8) {
-      h=15;
+      this.h=15;
     }else if (id==9 || id==10) {
-      h=7;
+      this.h=7;
     }else if (id==20) {
-      h=25;
+      this.h=25;
     }
-    super(posx,h,w);
     this.imagen;
     this.id=id;
     this.canvas = document.querySelector('canvas#TrackGenerator');
@@ -55,13 +53,7 @@ class TrackPart extends ObjetoSolido {
     }
     for (var i = 0; i < this.roads.length; i++) {
       this.roads[i]=new Array(this.w);
-    }
-    if (this.id==0 || this.id==11 || this.id==12 || this.id==13 || this.id==14 || this.id==15 || this.id==16 || this.id==17 || this.id==21) {
-      this.anguloentrada=0;
-      this.angulosalida=0;
-    }else if (this.id==1 || this.id==2 || this.id==3 || this.id==4 || this.id==5) {
-      this.anguloentrada=this.teoremaSeno(this.w/2);
-      this.angulosalida=this.teoremaSeno(this.w/2);
+      this.setPiso(i);
     }
     this.dibujar();
   }
@@ -122,7 +114,226 @@ class TrackPart extends ObjetoSolido {
     this.ctx.putImageData(imageDataTracks,pos,0);
     this.ctx.beginPath();
   }
+  setPiso(road){
+    let puntero;
+    if (this.id==0 || this.id==11 || this.id==12 || this.id==13 || this.id==14 || this.id==15 || this.id==16 || this.id==17 || this.id==21) {
+      for (let i = 0; i < this.roads[road].length; i++) {
+        this.roads[road][i] = 0;
+      }
+    }else if (this.id==1) {
+      for (let i = 0; i < 12; i++) {
+        this.roads[road][i] = i;
+        puntero=i;
+      }
+      for (let i = 12; i < 16; i++) {
+        this.roads[road][i]=puntero;
+      }
+      for (let i = 0; i < 12; i++) {
+        this.roads[road][i+16] = puntero-i;
+      }
+      for (let i = 28; i < this.roads[road].length; i++) {
+        this.roads[road][i] = 0;
+      }
+    }else if (this.id==2) {
+      for (let i = 0; i < 18; i++) {
+        this.roads[road][i] = i;
+        puntero=i;
+      }
+      for (let i = 18; i < 22; i++) {
+        this.roads[road][i]=puntero;
+      }
+      for (let i = 0; i < 18; i++) {
+        this.roads[road][i+22] = puntero-i;
+      }
+      for (let i = 40; i < this.roads[road].length; i++) {
+        this.roads[road][i] = 0;
+      }
+    }else if (this.id==3) {
+      for (let i = 0; i < 34; i++) {
+        this.roads[road][i] = i;
+        puntero=i;
+      }
+      for (let i = 34; i < 38; i++) {
+        this.roads[road][i]=puntero;
+      }
+      for (let i = 0; i < 34; i++) {
+        this.roads[road][i+38] = puntero-i;
+      }
+      for (let i = 72; i < this.roads[road].length; i++) {
+        this.roads[road][i] = 0;
+      }
+    }else if (this.id==4) {
+      for (let i = 0; i < 34; i++) {
+        if (i%2==0) {
+          this.roads[road][i] = i/2;
+        }else {
+          this.roads[road][i] = Math.floor(i/2);
+        }
+        puntero=i/2;
+      }
+      for (let i = 34; i < 38; i++) {
+        this.roads[road][i]=puntero;
+      }
+      for (let i = 0; i < 34; i++) {
+        if (i%2==0) {
+          this.roads[road][i+38] = puntero-i/2;
+        }else {
+          this.roads[road][i+38] = puntero-Math.floor(i/2);
+        }
+      }
+      for (let i = 72; i < this.roads[road].length; i++) {
+        this.roads[road][i] = 0;
+      }
+    }else if (this.id==5) {
+      for (let i = 0; i < 34; i++) {
+        this.roads[road][i] = i*2;
+        puntero=i*2;
+      }
+      for (let i = 34; i < 38; i++) {
+        this.roads[road][i]=puntero;
+      }
+      for (let i = 0; i < 34; i++) {
+        this.roads[road][i+38] = puntero-i*2;
+      }
+      for (let i = 72; i < this.roads[road].length; i++) {
+        this.roads[road][i] = 0;
+      }
+    }else if (this.id==6) {
+      for (let i = 0; i < 26; i++) {
+        this.roads[road][i] = i;
+        puntero=i;
+      }
+      for (let i = 26; i < 30; i++) {
+        this.roads[road][i]=puntero;
+      }
+      for (let i = 0; i < 26; i++) {
+        this.roads[road][i+30] = puntero-i*2;
+      }
+      for (let i = 56; i < this.roads[road].length; i++) {
+        this.roads[road][i] = 0;
+      }
+    }else if (this.id==7) {
+      for (let i = 0; i < 34; i++) {
+        this.roads[road][i] = i*2;
+        puntero=i*2;
+      }
+      for (let i = 34; i < 38; i++) {
+        this.roads[road][i]=puntero;
+      }
+      for (let i = 0; i < 34; i++) {
+        this.roads[road][i+38] = puntero-i;
+      }
+      for (let i = 72; i < this.roads[road].length; i++) {
+        this.roads[road][i] = 0;
+      }
+    }else if (this.id==8) {
+      if (road==3||road==4) {
+        for (let i = 0; i < this.roads[road].length; i++) {
+          this.roads[road][i] = i;
+        }
+      }else {
+        for (let i = 0; i < this.roads[road].length; i++) {
+          this.roads[road][i] = 0;
+        }
+      }
+    }else if (this.id==9) {
+      if (road==2||road==3) {
+        for (let i = 0; i < 2; i++) {
+          this.roads[road][i] = i*4;
+          puntero=i*4;
+        }
+        for (let i = 2; i < 5; i++) {
+          this.roads[road][i] = puntero;
+        }
+        for (let i = 0; i < 2; i++) {
+          this.roads[road][i+5] = puntero-i*4;
+        }
+        for (let i = 7; i < this.roads[road].length; i++) {
+          this.roads[road][i] = 0;
+        }
+      }else {
+        for (let i = 0; i < this.roads[road].length; i++) {
+          this.roads[road][i] = 0;
+        }
+      }
+    }else if (this.id==10) {
+      if (road==0||road==1) {
+        for (let i = 0; i < 2; i++) {
+          this.roads[road][i] = i*4;
+          puntero=i*4;
+        }
+        for (let i = 2; i < 5; i++) {
+          this.roads[road][i] = puntero;
+        }
+        for (let i = 0; i < 2; i++) {
+          this.roads[road][i+5] = puntero-i*4;
+        }
+        for (let i = 7; i < array.length; i++) {
+          this.roads[road][i] = 0;
+        }
+      }else {
+        for (let i = 0; i < this.roads[road].length; i++) {
+          this.roads[road][i] = 0;
+        }
+      }
+    }else if (this.id == 18) {
+      for (let i = 0; i < 16; i++) {
+        this.roads[road][i] = i;
+        puntero=i;
+      }
+      for (let i = 16; i < 64; i++) {
+        this.roads[road][i] = puntero;
+      }
+      for (let i = 0; i < 16; i++) {
+        puntero+=i*2;
+        this.roads[road][i+64] = puntero;
+      }
+      for (let i = 80; i < 144; i++) {
+        this.roads[road][i]=puntero;
+      }
+      for (let i = 0; i < 32; i++) {
+        this.roads[road][i+144]=puntero-i;
+      }
+      puntero-=31;
+      for (let i = 176; i < 192; i++) {
+        this.roads[road][i] = puntero;
+      }
+      for (let i = 0; i < 16; i++) {
+        this.roads[road][i+192] =puntero-i;
+      }
+    }else if (this.id == 19) {
+      for (let i = 0; i < 24; i++) {
+        this.roads[road][i]=i*2;
+        puntero=i*2;
+      }
+      for (let i = 24; i < 40; i++) {
+        this.roads[road][i]=puntero;
+      }
+      if (road==0||road==1) {
+        for (let i = 0; i < 24; i++) {
+          this.roads[road][i+40]=puntero-i*2;
+        }
+        for (var i = 64; i < this.roads[road].length; i++) {
+          this.roads[road][i] = 0;
+        }
+      }else if (road==2||road==3) {
+        for (let i = 40; i < 208; i++) {
+          this.roads[road][i]=puntero;
+        }
+        for (var i = 208; i < this.roads[road].length; i++) {
+          this.roads[road][i] = 0;
+        }
+      }else if (road==4||road==5) {
+        for (var i = 40; i < this.roads[road].length; i++) {
+          this.roads[road][i] = 0;
+        }
+      }
+    }
+  }
+  getPiso(w){
+
+  }
   teoremaSeno(w){
-    return (this.h*Math.sin(1.5708))/Math.hypot(this.h,w);
+    return (this.h*Math.sin(1.5708))/Math.hypot(this.h,this.w);
   }
 }

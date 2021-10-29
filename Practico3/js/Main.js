@@ -17,6 +17,7 @@ function tracksToCanvas() {
 
 function controles(event) { //setea los controles
   let key= event.key;
+  event.preventDefault();
   if (key == "w" || key == "W") { //jugador 1
     pista.cambiarCarril(0,"up");
   }else if (key == "a" || key == "A") {
